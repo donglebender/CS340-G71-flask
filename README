@@ -1,1 +1,5 @@
-I'll put something in here eventually.
+This needs to be run first thing any time we log out of the terminal:
+source ./venv/bin/activate
+
+IF YOU DON'T RUN THAT, THE VIRTUAL ENVIRONMENT WON'T WORK AND
+YOU'LL RUN INTO A BUNCH OF ISSUES
