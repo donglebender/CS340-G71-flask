@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Home Page</title>
+        <link rel="stylesheet" href="style.css">
+        <script language="JavaScript">
+            function showform(dowhat) {
+                /*
+                * four DIVS: browse, insert, update, delete
+                * this function sets one visible the others not
+                */
+                if (dowhat == 'insert'){
+                    document.getElementById('browse').style.display = 'none';
+                    document.getElementById('insert').style.display = 'block';
+                    document.getElementById('update').style.display = 'none';
+                    document.getElementById('delete').style.display = 'none';
+                }
+                else if (dowhat == 'update'){
+                    document.getElementById('browse').style.display = 'none';
+                    document.getElementById('insert').style.display = 'none';
+                    document.getElementById('update').style.display = 'block';
+                    document.getElementById('delete').style.display = 'none';
+                }
+                else if (dowhat == 'delete'){
+                    document.getElementById('browse').style.display = 'none';
+                    document.getElementById('insert').style.display = 'none';
+                    document.getElementById('update').style.display = 'none';
+                    document.getElementById('delete').style.display = 'block';
+                }
+          else if (dowhat == 'all'){
+                    document.getElementById('browse').style.display = 'block';
+                    document.getElementById('insert').style.display = 'block';
+                    document.getElementById('update').style.display = 'block';
+                    document.getElementById('delete').style.display = 'block';
+                }
+                else { //by default display browse
+                    document.getElementById('browse').style.display = 'block';
+                    document.getElementById('insert').style.display = 'none';
+                    document.getElementById('update').style.display = 'none';
+                    document.getElementById('delete').style.display = 'none';
+                }
+            }
+        function newCert() { showform('insert'); }
+        function updateCert(pid) { showform('update'); }
+        function deleteCert(pid) { showform ('delete'); }
+        function browseCert() { showform ('browse'); }
+        function showAll() { showform ('all'); }
+    </script>
+    </head>
+    <body onload="browseCert()">
+        <h1>B&B Ski School</h1>
+        <h2>Certifications Page</h2>
+        <!--Links to other pages-->
+        <header>
+  <p><button><a href="http://127.0.0.1:8028/">Back to Home Page</a></button></p>
+   <nav>
+    <button><a href="http://127.0.0.1:8028/certifications">Certifications</a></button>
+    <button><a href="http://127.0.0.1:8028/customers">Customers</a></button>
+    <button><a href="http://127.0.0.1:8028/instructors">Instructors</a></button>
+    <button><a href="http://127.0.0.1:8028/lessons">Lessons</a></button>
+  </nav>
+</header>
+
+        <div id="browse">
+            <p><a href="#" onClick="showAll()">Display all forms</a> </p>
+            
+            <button><a href="#" onClick="newCert()">Add a new Certificaion</a></button>
+            
+            <!-- browse -->
+            
+            <table border="1" cellpadding="5">
+              <tr>
+                <th>certID</th>
+                <th>certName</th>
+                <th>Edit</th>
+                <th>Delete</th>
+              </tr>
+              <tr>
+                <td align="right" >01</td>
+                <td >Ski0</td>
+                <td><a href="#" onClick="updateCert('this.certID')">Edit</a></td>
+                <td><a href="#" onclick="deleteCert('this.certID')">Delete</a></td>
+              </tr>
+              <tr>
+                <td align="right" >02</td>
+                <td>Ski1</td>
+                <td><a href="#" onClick="updateCert('this.certID')">Edit</a></td>
+                <td><a href="#" onclick="deleteCert('this.certID')">Delete</a></td>
+              </tr>
+              <tr>
+                <td align="right" >03</td>
+                <td>Ski2</td>
+                <td><a href="#" onClick="updateCert('this.certID')">Edit</a></td>
+                <td><a href="#" onclick="deleteCert('this.certID')">Delete</a></td>
+              </tr>
+              <tr>
+                <td align="right" >04</td>
+                <td>Ski3</td>
+                <td><a href="#" onClick="updateCert('this.certID')">Edit</a></td>
+                <td><a href="#" onclick="deleteCert('this.certID')">Delete</a></td>
+              </tr>
+              <tr>
+                <td align="right" >05</td>
+                <td>Snowboard0</td>
+                <td><a href="#" onClick="updateCert('this.certID')">Edit</a></td>
+                <td><a href="#" onclick="deleteCert('this.certID')">Delete</a></td>
+              </tr>
+              <tr>
+                <td align="right" >06</td>
+                <td>Snowboard1</td>
+                <td><a href="#" onClick="updateCert('this.certID')">Edit</a></td>
+                <td><a href="#" onclick="deleteCert('this.certID')">Delete</a></td>
+              </tr>
+              <tr>
+                <td align="right" >07</td>
+                <td>Snowboard2</td>
+                <td><a href="#" onClick="updateCert('this.certID')">Edit</a></td>
+                <td><a href="#" onclick="deleteCert('this.certID')">Delete</a></td>
+              </tr>
+              <tr>
+                <td align="right" >08</td>
+                <td>Snowboard3</td>
+                <td><a href="#" onClick="updateCert('this.certID')">Edit</a></td>
+                <td><a href="#" onclick="deleteCert('this.certID')">Delete</a></td>
+              </tr>
+              <tr>
+                <td align="right" >09</td>
+                <td>Kids1</td>
+                <td><a href="#" onClick="updateCert('this.certID')">Edit</a></td>
+                <td><a href="#" onclick="deleteCert('this.certID')">Delete</a></td>
+              </tr>
+              <tr>
+                <td align="right" >10</td>
+                <td>Kids2</td>
+                <td><a href="#" onClick="updateCert('this.certID')">Edit</a></td>
+                <td><a href="#" onclick="deleteCert('this.certID')">Delete</a></td>
+              </tr>
+              <tr>
+                <td align="right" >11</td>
+                <td>Kids3</td>
+                <td><a href="#" onClick="updateCert('this.certID')">Edit</a></td>
+                <td><a href="#" onclick="deleteCert('this.certID')">Delete</a></td>
+              </tr>
+            </table>
+            <p>&nbsp;</p>
+            </div>
+            
+            <!-- insert -->
+            
+            <div id="insert">
+                <form method="POST" id="addPlanet">
+                    <legend><strong>Add Cert</strong></legend>
+                      <fieldset class="fields">
+                        <label> Cert Name </label> <input type="text" name="certName">
+            
+                  </fieldset>
+                      <input class="btn" type="submit" id="addPerson" value="Add Cert">
+                      <input class="btn" type="button" value="cancel" onClick="browseCert()">
+                </form> 
+            </div>
+            <p>&nbsp;</p>
+            
+            <!-- update -->
+            
+            <div id="update">
+                <form method="POST" id="updateCert">
+                    <legend><strong>Update Cert</strong></legend>
+                      <fieldset class="fields">
+                      <input type="hidden" name="certID" id="updateCertID" value="1">
+                      <label> ID: </label> 1
+                        <label> New Cert Name </label> <input type="text" name="certName" value="Ski3">
+                  </fieldset>
+                      <input class="btn" type="submit" id="UpdateSavePerson" value="Save New Cert Name">
+                      <input class="btn" type="button" value="cancel" onClick="browseCert()">
+                </form> 
+            </div>
+            <p>&nbsp;</p>
+            
+            
+            <!-- delete -->
+            
+            <div id="delete" style="display: block">
+              <form method="POST" id="deleteCert">
+                  <legend><strong>Delete Cert</strong></legend>
+                      <fieldset class="fields">
+                      <p>Are you sure you wish to delete the following?</p>
+
+                      <!--NEED TO UPDATE THIS SO THAT ACTUAL CERTID/NAME IS POPULATED-->
+                      <input type="hidden" name="certID" id="deleteCertID" value="1">
+                      <label><strong>ID:</strong></label>1<label><strong>Cert Name</strong> Ski11</label> 
+                        
+                </fieldset>
+                <input class="btn" type="submit" id="deleteCert" value="Delete Cert">
+                      <input class="btn" type="button" value="cancel" onClick="browseCert()">
+              </form> 
+            </div>
+    </body>
+</html>
+
+
+

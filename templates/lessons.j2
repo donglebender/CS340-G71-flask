@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>BBSLessons</title>
+        <link rel="stylesheet" href="style.css">
+        <script language="JavaScript">
+            function showform(dowhat) {
+                /*
+                * four DIVS: browse, insert, update, delete
+                * this function sets one visible the others not
+                */
+                if (dowhat == 'insert'){
+                    document.getElementById('browse').style.display = 'none';
+                    document.getElementById('insert').style.display = 'block';
+                    document.getElementById('update').style.display = 'none';
+                    document.getElementById('delete').style.display = 'none';
+                }
+                else if (dowhat == 'update'){
+                    document.getElementById('browse').style.display = 'none';
+                    document.getElementById('insert').style.display = 'none';
+                    document.getElementById('update').style.display = 'block';
+                    document.getElementById('delete').style.display = 'none';
+                }
+                else if (dowhat == 'delete'){
+                    document.getElementById('browse').style.display = 'none';
+                    document.getElementById('insert').style.display = 'none';
+                    document.getElementById('update').style.display = 'none';
+                    document.getElementById('delete').style.display = 'block';
+                }
+          else if (dowhat == 'all'){
+                    document.getElementById('browse').style.display = 'block';
+                    document.getElementById('insert').style.display = 'block';
+                    document.getElementById('update').style.display = 'block';
+                    document.getElementById('delete').style.display = 'block';
+                }
+                else { //by default display browse
+                    document.getElementById('browse').style.display = 'block';
+                    document.getElementById('insert').style.display = 'none';
+                    document.getElementById('update').style.display = 'none';
+                    document.getElementById('delete').style.display = 'none';
+                }
+            }
+        function newLesson() { showform('insert'); }
+        function updateLesson(pid) { showform('update'); }
+        function deleteLesson(pid) { showform ('delete'); }
+        function browseLesson() { showform ('browse'); }
+        function showAll() { showform ('all'); }
+    </script>
+    </head>
+    <body onload="browseLesson()">
+        <h1>B&B Ski School</h1>
+        <h2>Lessons Page</h2>
+        <!--Links to other pages-->
+        <header>
+  <p><button><a href="http://127.0.0.1:8028/">Back to Home Page</a></button></p>
+   <nav>
+    <button><a href="http://127.0.0.1:8028/certifications">Certifications</a></button>
+    <button><a href="http://127.0.0.1:8028/customers">Customers</a></button>
+    <button><a href="http://127.0.0.1:8028/instructors">Instructors</a></button>
+    <button><a href="http://127.0.0.1:8028/lessons">Lessons</a></button>
+  </nav>
+
+        <div id="browse">
+            <p><a href="#" onClick="showAll()">Display all forms</a> </p>
+            
+            <button><a href="#" onClick="newLesson()">Add a new Lesson</a></button>
+            
+            <!-- browse -->
+            
+            <table border="1" cellpadding="5">
+              <tr>
+                <th>lessonID</th>
+                <th>instructorID</th>
+                <th>lessonType</th>
+                <th>lessonDate</th>
+                <th>request</th>
+                <th>Edit</th>
+                <th>Delete</th>
+              </tr>
+              <tr>
+                <td align="right" >01</td>
+                <th>01</th>
+                <th>group</th>
+                <th>2022-07-10</th>
+                <th>false</th>
+                <td><a href="#" onClick="updateLesson('this.lessonID')">Edit</a></td>
+                <td><a href="#" onclick="deleteLesson('this.lessonID')">Delete</a></td>
+              </tr>
+              <tr>
+                <td align="right" >02</td>
+                <th>01</th>
+                <th>group</th>
+                <th>2022-07-11</th>
+                <th>false</th>
+                <td><a href="#" onClick="updateLesson('this.lessonID')">Edit</a></td>
+                <td><a href="#" onclick="deleteLesson('this.lessonID')">Delete</a></td>
+              </tr>
+              <tr>
+                <td align="right" >03</td>
+                <th>02</th>
+                <th>group</th>
+                <th>2022-07-13</th>
+                <th>true</th>
+                <td><a href="#" onClick="updateLesson('this.lessonID')">Edit</a></td>
+                <td><a href="#" onclick="deleteLesson('this.lessonID')">Delete</a></td>
+              </tr>
+            </table>
+            <p>&nbsp;</p>
+            </div>
+            
+            <!-- insert -->
+            
+            <div id="insert">
+                <form method="POST" id="addPlanet">
+                    <legend><strong>Add Lesson</strong></legend>
+                      <fieldset class="fields">
+                        <label> Lesson Name </label> <input type="text" name="lessonName">
+            
+                  </fieldset>
+                      <input class="btn" type="submit" id="addPerson" value="Add Lesson">
+                      <input class="btn" type="button" value="cancel" onClick="browseLesson()">
+                </form> 
+            </div>
+            <p>&nbsp;</p>
+            
+            <!-- update -->
+            
+            <div id="update">
+                <form method="POST" id="updateLesson">
+                    <legend><strong>Update Lesson</strong></legend>
+                      <fieldset class="fields">
+                      <input type="hidden" name="lessonID" id="updateLessonID" value="1">
+                      <label> ID: </label> 1
+                        <label> New Lesson Name </label> <input type="text" name="lessonName" value="Ski3">
+                  </fieldset>
+                      <input class="btn" type="submit" id="UpdateSavePerson" value="Save New Lesson Name">
+                      <input class="btn" type="button" value="cancel" onClick="browseLesson()">
+                </form> 
+            </div>
+            <p>&nbsp;</p>
+            
+            
+            <!-- delete -->
+            
+            <div id="delete" style="display: block">
+              <form method="POST" id="deleteLesson">
+                  <legend><strong>Delete Lesson</strong></legend>
+                      <fieldset class="fields">
+                      <p>Are you sure you wish to delete the following?</p>
+
+                      <!--NEED TO UPDATE THIS SO THAT ACTUAL LessonID/NAME IS POPULATED-->
+                      <input type="hidden" name="lessonID" id="deleteLessonID" value="1">
+                      <label><strong>ID:</strong></label>1<label><strong>Lesson Name</strong> Ski11</label> 
+                        
+                </fieldset>
+                <input class="btn" type="submit" id="deleteLesson" value="Delete Lesson">
+                      <input class="btn" type="button" value="cancel" onClick="browseLesson()">
+              </form> 
+            </div>
+    </body>
+</html>
+
+
+

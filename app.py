@@ -22,6 +22,22 @@ def bsg_people():
     results = cursor.fetchall()
     return render_template("bsg.j2", bsg_people=results)
 
+@app.route('/certifications')
+def certs():
+    return render_template("certifications.j2")
+
+@app.route('/customers')
+def customers():
+    return render_template("customers.j2")
+
+@app.route('/instructors')
+def instructors():
+    return render_template("instructors.j2")
+
+@app.route('/lessons')
+def lessons():
+    return render_template("lessons.j2")
+
 # Listener
 
 if __name__ == "__main__":

@@ -1,28 +1,18 @@
 <html>
 <head>
-    <title>OSU - CS 340 - Introduction to Databases - Flask Demo Project</title>
+    <title>BBSki</title>
 </head>
 <body>
-    <h1>CS 340 - Introduction to Databases</h1>
-    <p>This is a demonstration project created to show students how to create a Flask app and connect it to a MySQL database.</p>
+    <h1>B&B Ski School</h1>
+    <p>Welcome to the Bender & Bustamante Ski School Database Site. Here you can view all of the certifications our instructors can have, our list of customers, who we have on staff as instructors, and which lessons we have on the books.</p>
 </body>
 </html>
-
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Age</th>
-        <th>Location</th>
-        <th>Favorite Language</th>
-    </tr>
-    <tbody>
-    {% for item in people %}
-    <tr>
-        <td>{{item['name']}}</td>
-        <td>{{item['age']}}</td>
-        <td>{{item['location']}}</td>
-        <td>{{item['favorite_color']}}</td>
-    </tr>
-    {% endfor %}
-    </table>
+<header>
+  <p><button><a href="http://127.0.0.1:8028/">Back to Home Page</a></button></p>
+   <nav>
+    <button><a href="http://127.0.0.1:8028/certifications">Certifications</a></button>
+    <button><a href="http://127.0.0.1:8028/customers">Customers</a></button>
+    <button><a href="http://127.0.0.1:8028/instructors">Instructors</a></button>
+    <button><a href="http://127.0.0.1:8028/lessons">Lessons</a></button>
+  </nav>
+</header>
