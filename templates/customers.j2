@@ -1,46 +1,42 @@
 <!DOCTYPE html>
+<!-- Adapted from the people.html UI design -->
 <html>
     <head>
-        <meta charset="utf-8">
         <title>BBSCustomers</title>
-        <link rel="stylesheet" href="style.css">
+        <link href="style.css" rel="stylesheet" type="text/css" />
         <script language="JavaScript">
-            function showform(dowhat) {
-                /*
-                * four DIVS: browse, insert, update, delete
-                * this function sets one visible the others not
-                */
-                if (dowhat == 'insert'){
-                    document.getElementById('browse').style.display = 'none';
-                    document.getElementById('insert').style.display = 'block';
-                    document.getElementById('update').style.display = 'none';
-                    document.getElementById('delete').style.display = 'none';
-                }
-                else if (dowhat == 'update'){
-                    document.getElementById('browse').style.display = 'none';
-                    document.getElementById('insert').style.display = 'none';
-                    document.getElementById('update').style.display = 'block';
-                    document.getElementById('delete').style.display = 'none';
-                }
-                else if (dowhat == 'delete'){
-                    document.getElementById('browse').style.display = 'none';
-                    document.getElementById('insert').style.display = 'none';
-                    document.getElementById('update').style.display = 'none';
-                    document.getElementById('delete').style.display = 'block';
-                }
-          else if (dowhat == 'all'){
-                    document.getElementById('browse').style.display = 'block';
-                    document.getElementById('insert').style.display = 'block';
-                    document.getElementById('update').style.display = 'block';
-                    document.getElementById('delete').style.display = 'block';
-                }
-                else { //by default display browse
-                    document.getElementById('browse').style.display = 'block';
-                    document.getElementById('insert').style.display = 'none';
-                    document.getElementById('update').style.display = 'none';
-                    document.getElementById('delete').style.display = 'none';
-                }
+        function showform(dowhat) {
+            /*
+             * four DIVS: browse, insert, update, delete
+             * this function sets one visible the others not
+             */
+            if(dowhat == 'insert') {
+                document.getElementById('browse').style.display = 'none';
+                document.getElementById('insert').style.display = 'block';
+                document.getElementById('edit').style.display = 'none';
+                document.getElementById('delete').style.display = 'none';
+            } else if(dowhat == 'update') {
+                document.getElementById('browse').style.display = 'none';
+                document.getElementById('insert').style.display = 'none';
+                document.getElementById('edit').style.display = 'block';
+                document.getElementById('delete').style.display = 'none';
+            } else if(dowhat == 'delete') {
+                document.getElementById('browse').style.display = 'none';
+                document.getElementById('insert').style.display = 'none';
+                document.getElementById('edit').style.display = 'none';
+                document.getElementById('delete').style.display = 'block';
+            } else if(dowhat == 'all') {
+                document.getElementById('browse').style.display = 'block';
+                document.getElementById('insert').style.display = 'block';
+                document.getElementById('edit').style.display = 'block';
+                document.getElementById('delete').style.display = 'block';
+            } else { //by default display browse
+                document.getElementById('browse').style.display = 'block';
+                document.getElementById('insert').style.display = 'none';
+                document.getElementById('edit').style.display = 'none';
+                document.getElementById('delete').style.display = 'none';
             }
+        }
         function newCustomer() { showform('insert'); }
         function updateCustomer(pid) { showform('update'); }
         function deleteCustomer(pid) { showform ('delete'); }
@@ -48,92 +44,110 @@
         function showAll() { showform ('all'); }
     </script>
     </head>
-    <body onload="browseCustomer()">
+
+<body onload="browseCustomer()">
         <h1>B&B Ski School</h1>
         <h2>Customers Page</h2>
         <!--Links to other pages-->
        <header>
-  <p><button><a href="http://flip1.engr.oregonstate.edu:8021/">Back to Home Page</a></button></p>
-   <nav>
-    <button><a href="http://flip1.engr.oregonstate.edu:8021/certifications">Certifications</a></button>
-    <button><a href="http://flip1.engr.oregonstate.edu:8021/customers">Customers</a></button>
-    <button><a href="http://flip1.engr.oregonstate.edu:8021/instructors">Instructors</a></button>
-    <button><a href="http://flip1.engr.oregonstate.edu:8021/lessons">Lessons</a></button>
-  </nav>
-</header>
+            <p><button><a href="http://flip1.engr.oregonstate.edu:8021/">Back to Home Page</a></button></p>
+            <nav>
+                <button><a href="http://flip1.engr.oregonstate.edu:8021/certifications">Certifications</a></button>
+                <button><a href="http://flip1.engr.oregonstate.edu:8021/customers">Customers</a></button>
+                <button><a href="http://flip1.engr.oregonstate.edu:8021/instructors">Instructors</a></button>
+                <button><a href="http://flip1.engr.oregonstate.edu:8021/lessons">Lessons</a></button>
+            </nav>
+        </header>
 
         <div id="browse">
+            <!--
             <p><a href="#" onClick="showAll()">Display all forms</a> </p>
-            
+            -->
             <button><a href="#" onClick="newCustomer()">Add a new Customer</a></button>
-            
-            <!-- browse -->
-            
             <table border="1" cellpadding="5">
-              <tr>
-                <th>customerID</th>
-                <th>firstName</th>
-                <th>lastName</th>
-                <th>custEmail</th>
-                <th>Edit</th>
-                <th>Delete</th>
-              </tr>
-              <tr>
-                <td align="right" >01</td>
-                <th>John</th>
-                <th>Doe</th>
-                <th>john@email.com</th>
-                <td><a href="#" onClick="updateCustomer('this.customerID')">Edit</a></td>
-                <td><a href="#" onclick="deleteCustomer('this.customerID')">Delete</a></td>
-              </tr>
-              <tr>
-                <td align="right" >02</td>
-                <td>Jane</td>
-                <th>Doe</th>
-                <th>jane@email.com</th>
-                <td><a href="#" onClick="updateCustomer('this.customerID')">Edit</a></td>
-                <td><a href="#" onclick="deleteCustomer('this.customerID')">Delete</a></td>
-              </tr>
-              <tr>
-                <td align="right" >03</td>
-                <td>Mary</td>
-                <th>Sue</th>
-                <th>mary@email.com</th>
-                <td><a href="#" onClick="updateCustomer('this.customerID')">Edit</a></td>
-                <td><a href="#" onclick="deleteCustomer('this.customerID')">Delete</a></td>
-              </tr>
-            </table>
-            <p>&nbsp;</p>
-            </div>
+           <!-- Access data tuple passed from app.py --> 
+           
+           <!--BROWSE-->
+           {% if data %}
+           <thead>
+             <tr>
+               <!-- Iterate through each key in the first entry to get the column name -->
+                         {% for key in data[0].keys() %}
+               
+                         <!-- Create a <th> tag with the key inside of it, this will be our header row -->
+               <th scope="col" data-field="{{ key }}" data-filter-control="input">{{ key }}</th>
+           
+                         <!-- End of this for loop -->
+                         {% endfor %} 
+                     </tr>
             
-            <!-- insert -->
+                     <tbody>
+                      <!-- Now, iterate through every item in data -->{% for item in data %}
+                          <tr>
+                            <!-- Then iterate through every key in the current item dictionary -->
+                                        {% for key in item.keys() %}
             
+                            <!-- Create a <td> element with the value of that key in it -->
+                            <td> {{item[key]}} </td> 
+                                        {% endfor %}
+            
+                                        <!-- Create our edit/delete buttons -->
+                            <td><a href="edit_customer/{{item.customerID}}" class="btn btn-default">Edit</a></td>
+                            <td><a href="delete_customer/{{item.customerID}}" class="btn btn-default">Delete</a></td>
+            
+                          </tr> 
+                                    {% endfor %} 
+                            {% endif %} 
+                    </table>   
+              <p>&nbsp;</p>
+              </div>         
+          
+
+
+            
+          <!--INSERT-->
             <div id="insert">
-                <form method="POST" id="addPlanet">
+                <!-- form to INSERT new data into bsg_people-->
+                <form id="insertCustomer" action="/customers" method="post">
                     <legend><strong>Add Customer</strong></legend>
-                      <fieldset class="fields">
-                        <label> Customer Name </label> <input type="text" name="customerName">
-            
-                  </fieldset>
-                      <input class="btn" type="submit" id="addPerson" value="Add Customer">
-                      <input class="btn" type="button" value="cancel" onClick="browseCustomer()">
-                </form> 
+                    <fieldset>
+                        <!-- placeholder shows ghost text, required forces an input, pattern forces input adherence -->
+                        <label for="make">first name:</label>
+                        <input type="text" class="form-control" id="firstName" name="firstName" pattern="[A-Za-z]{1,}" placeholder="" required>
+
+                        <label for="model">last name:</label>
+                        <input type="text" class="form-control" id="lastName" name="lastName" pattern="[A-Za-z0-9]{1,}" placeholder="" required>
+
+                        <label for="color">email:</label>
+                        <input type="email" class="form-control" id="custEmail" name="custEmail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="" required> 
+                    </fieldset>
+
+                    <!-- Create 'Add Person' and 'Cancel' buttons -->
+                    <input type="submit" value="Add Customer" name="Add_Customer" class="btn btn-primary" style="margin:.5rem;">
+                    <input class="btn" type="button" value="Cancel" onClick="browseCustomer()"> 
+                </form>
             </div>
-            <p>&nbsp;</p>
             
-            <!-- update -->
+            <!--UPDATE-->
             
-            <div id="update">
-                <form method="POST" id="updateCustomer">
-                    <legend><strong>Update Customer</strong></legend>
-                      <fieldset class="fields">
-                      <input type="hidden" name="customerID" id="updateCustomerID" value="1">
-                      <label> ID: </label> 1
-                        <label> New Customer Name </label> <input type="text" name="customerName" value="Ski3">
-                  </fieldset>
-                      <input class="btn" type="submit" id="UpdateSavePerson" value="Save New Customer Name">
-                      <input class="btn" type="button" value="cancel" onClick="browseCustomer()">
-                </form> 
+            <div id="edit">
+                <!-- form to edit data in bsg_people-->
+                <form id="editCustomer" action="/edit_customer/{{data[0].customerID}}" method="post">
+                    <legend><strong>Edit Person</strong></legend>
+                    <fieldset>
+                        <input type="hidden" value="{{data[0].customerID}}" class="form-control" id="customerID" name="customerID" required>
+                        <label for="make">first name:</label>
+        
+                        <input type="text" class="form-control" id="firstName" name="firstName" pattern="[A-Za-z]{1,}" placeholder="{{data[0].firstName}}" required>
+                        <label for="model">last name:</label>
+        
+                        <input type="text" class="form-control" id="lastName" name="lastName" pattern="[A-Za-z0-9]{1,}" placeholder="{{data[0].lastName}}" required>
+        
+                        <label for="color">email:</label>
+                        <input type="email" class="form-control" id="custEmail" name="custEmail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="{{data[0].custEmail}}" required>
+                    </fieldset>
+                        <input class="btn" type="button" value="Cancel" onClick="browseCustomer()" style="margin:.5rem;"> 
+                </form>
             </div>
             <p>&nbsp;</p>
             
@@ -157,6 +171,10 @@
             </div>
     </body>
 </html>
+
+
+
+
 
 
 
