@@ -1,5 +1,28 @@
-This needs to be run first thing any time we log out of the terminal:
-source ./venv/bin/activate
+SETUP:
+Clone the git repository to any one of OSU's flip servers.
+Run the following commands to install the necessary depenencies:
+pip3 install --user virtualenv
+python3 -m venv
+source ./bin/activate
+pip3 install flask-mysqldb
+pip3 install gunicorn
 
-IF YOU DON'T RUN THAT, THE VIRTUAL ENVIRONMENT WON'T WORK AND
-YOU'LL RUN INTO A BUNCH OF ISSUES
+RUNNING:
+After initial setup, run the following commands before testing any website changes:
+source ./venv/bin/activate
+^this initiates the virtual environment where we've set up our modules
+
+gunicorn -b 0.0.0.0:802x -D app:app
+^this starts the server, if it isn't already running. Change the final x to any number aside from
+"1" for development, and change the final x to "1" for deployment
+
+
+CLOSING:
+If you want to kill an active server (so you can restart it), first run the following command:
+ps ax | grep gunicorn
+^Then find your specific instance of the server. Find the 4/5-digit number that precedes your
+specific gunicorn instance. It will look like /nfs/stak/users/YOURONID/whateverelse
+
+Then run the following command to kill the server:
+kill -p xxxxx
+^Where xxxxx is the number you found for your process
