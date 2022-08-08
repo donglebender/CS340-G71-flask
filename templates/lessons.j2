@@ -63,65 +63,70 @@
 </header>
 
         <div id="browse">
-            <p><a href="#" onClick="showAll()">Display all forms</a> </p>
-            
-            <button><a href="#" onClick="newLesson()">Add a new Lesson</a></button>
-            
-            <!-- browse -->
-            
+            <button><a href="#" onClick="newLesson()">Add a Lesson</a></button>
             <table border="1" cellpadding="5">
-              <tr>
-                <th>lessonID</th>
-                <th>instructorID</th>
-                <th>lessonType</th>
-                <th>lessonDate</th>
-                <th>request</th>
-                <th>Edit</th>
-                <th>Delete</th>
-              </tr>
-              <tr>
-                <td align="right" >01</td>
-                <th>01</th>
-                <th>group</th>
-                <th>2022-07-10</th>
-                <th>false</th>
-                <td><a href="#" onClick="updateLesson('this.lessonID')">Edit</a></td>
-                <td><a href="#" onclick="deleteLesson('this.lessonID')">Delete</a></td>
-              </tr>
-              <tr>
-                <td align="right" >02</td>
-                <th>01</th>
-                <th>group</th>
-                <th>2022-07-11</th>
-                <th>false</th>
-                <td><a href="#" onClick="updateLesson('this.lessonID')">Edit</a></td>
-                <td><a href="#" onclick="deleteLesson('this.lessonID')">Delete</a></td>
-              </tr>
-              <tr>
-                <td align="right" >03</td>
-                <th>02</th>
-                <th>group</th>
-                <th>2022-07-13</th>
-                <th>true</th>
-                <td><a href="#" onClick="updateLesson('this.lessonID')">Edit</a></td>
-                <td><a href="#" onclick="deleteLesson('this.lessonID')">Delete</a></td>
-              </tr>
-            </table>
-            <p>&nbsp;</p>
-            </div>
+           <!-- Access data tuple passed from app.py --> 
+           
+           <!--BROWSE-->
             
-            <!-- insert -->
+           {% if data %}
+           <thead>
+             <tr>
+               <!-- Iterate through each key in the first entry to get the column name -->
+                         {% for key in data[0].keys() %}
+               
+                         <!-- Create a <th> tag with the key inside of it, this will be our header row -->
+               <th scope="col" data-field="{{ key }}" data-filter-control="input">{{ key }}</th>
+           
+                         <!-- End of this for loop -->
+                         {% endfor %} 
+                     </tr>
             
+                     <tbody>
+                      <!-- Now, iterate through every item in data -->{% for item in data %}
+                          <tr>
+                            <!-- Then iterate through every key in the current item dictionary -->
+                                        {% for key in item.keys() %}
+            
+                            <!-- Create a <td> element with the value of that key in it -->
+                            <td> {{item[key]}} </td> 
+                                        {% endfor %}
+            
+                                        <!-- Create our edit/delete buttons -->
+                            <td><a href="edit_lesson/{{item.lessonID}}" class="btn btn-default">Edit</a></td>
+                            <td><a href="delete_lesson/{{item.lessonID}}" class="btn btn-default">Delete</a></td>
+            
+                          </tr> 
+                                    {% endfor %} 
+                            {% endif %} 
+                    </table>   
+              <p>&nbsp;</p>
+              </div>         
+            
+          <!--INSERT-->
             <div id="insert">
-                <form method="POST" id="addPlanet">
+                <!-- form to INSERT new data into Lessons-->
+                <form id="insertLesson" action="/lessons" method="post">
                     <legend><strong>Add Lesson</strong></legend>
-                      <fieldset class="fields">
-                        <label> Lesson Name </label> <input type="text" name="lessonName">
-            
-                  </fieldset>
-                      <input class="btn" type="submit" id="addPerson" value="Add Lesson">
-                      <input class="btn" type="button" value="cancel" onClick="browseLesson()">
-                </form> 
+                    <fieldset>
+                        <!-- placeholder shows ghost text, required forces an input, pattern forces input adherence -->
+                        <label for="make">Instructor ID:</label>
+                        <input type="text" class="form-control" id="instructorID" name="instructorID" pattern="[0-9]{1,}" placeholder="" required>
+
+                        <label for="model">Lesson Type:</label>
+                        <input type="text" class="form-control" id="lessonType" name="lessonType" pattern="\bgroup$|\bprivate$" placeholder="" required>
+
+                        <label for="color">Lesson Date:</label>
+                        <input type="date" class="form-control" id="lessonDate" name="lessonDate" placeholder="" required> 
+
+                        <label for="color">Request:</label>
+                        <input type="text" class="form-control" id="request" name="request" pattern="\btrue$|\bfalse$" placeholder="" required> 
+                    </fieldset>
+
+                    <!-- Create 'Add Person' and 'Cancel' buttons -->
+                    <input type="submit" value="Add Lesson" name="Add_Lesson" class="btn btn-primary" style="margin:.5rem;">
+                    <input class="btn" type="button" value="Cancel" onClick="browseLesson()"> 
+                </form>
             </div>
             <p>&nbsp;</p>
             
@@ -133,7 +138,7 @@
                       <fieldset class="fields">
                       <input type="hidden" name="lessonID" id="updateLessonID" value="1">
                       <label> ID: </label> 1
-                        <label> New Lesson Name </label> <input type="text" name="lessonName" value="Ski3">
+                        <label> New Lesson Type </label> <input type="text" name="lessonType" value="group">
                   </fieldset>
                       <input class="btn" type="submit" id="UpdateSavePerson" value="Save New Lesson Name">
                       <input class="btn" type="button" value="cancel" onClick="browseLesson()">
@@ -161,6 +166,5 @@
             </div>
     </body>
 </html>
-
 
 

@@ -267,13 +267,125 @@ def delete_customer(customerID):
     return redirect("/customers")
 
 
-@app.route('/instructors')
+@app.route('/instructors', methods=["POST", "GET"])
 def instructors():
-    return render_template("instructors.j2")
 
-@app.route('/lessons')
+     # Separate out the request methods, in this case this is for a POST 
+     # insert an instructor
+    if request.method == "POST":
+        # fire off if user presses the Add Instructor button
+        if request.form.get("Add_Instructor"):
+            # grab user form inputs
+            firstName = request.form["firstName"]
+            lastName = request.form["lastName"]
+            instructEmail = request.form["instructEmail"]
+
+            # no null inputs
+            query = "INSERT INTO Instructors (firstName, lastName, instructEmail) VALUES (%s, %s, %s)"
+            cur = mysql.connection.cursor()
+            cur.execute(query, (firstName, lastName, instructEmail))
+            mysql.connection.commit()
+
+            # redirect back to people page
+            return redirect("/instructors")
+
+        # Grab Instructors data so we send it to our template to display
+    if request.method == "GET":
+        # mySQL query to grab all the people in Instructors
+        query = "SELECT instructorID, firstName, lastName, instructEmail FROM Instructors;"
+        cur = mysql.connection.cursor()
+        cur.execute(query)
+        data = cur.fetchall()
+
+        # render instructor page
+        return render_template("instructors.j2", data=data)
+
+@app.route("/edit_instructor/<int:instructorID>", methods=["POST", "GET"])
+def edit_instructor(instructorID):
+    if request.method == "GET":
+        # mySQL query to grab the info of the person with our passed id
+        query = "SELECT * FROM Instructors WHERE instructorID = %s" % (instructorID)
+        cur = mysql.connection.cursor()
+        cur.execute(query)
+        data = cur.fetchall()
+
+
+        # render edit_instructor
+        return render_template("edit_instructor.j2", data=data)
+
+    # meat and potatoes of our update functionality
+    if request.method == "POST":
+        # fire off if user clicks the 'Edit Instructor' button
+        if request.form.get("Edit_Instructor"):
+            # grab user form inputs
+            instructorID = request.form["instructorID"]
+            firstName = request.form["firstName"]
+            lastName = request.form["lastName"]
+            instructEmail = request.form["instructEmail"]
+
+
+            query = "UPDATE Instructors SET firstName = %s, lastName = %s, instructEmail = %s WHERE instructorID = %s"
+            cur = mysql.connection.cursor()
+            cur.execute(query, (firstName, lastName, instructEmail, instructorID))
+            mysql.connection.commit()
+
+            # redirect back to Instructors page after we execute the update query
+            return redirect("/instructors")
+
+@app.route("/delete_instructor/<int:instructorID>")
+def delete_instructor(instructorID):
+    # mySQL query to delete the person with our passed id
+    query = "DELETE FROM Instructors WHERE instructorID = '%s';"
+    cur = mysql.connection.cursor()
+    cur.execute(query, (instructorID,))
+    mysql.connection.commit()
+
+    # redirect back to people page
+    return redirect("/instructors")
+
+@app.route('/lessons', methods=["POST", "GET"])
 def lessons():
-    return render_template("lessons.j2")
+     # Separate out the request methods, in this case this is for a POST 
+     # insert a lesson
+    if request.method == "POST":
+        # fire off if user presses the Add Lesson button
+        if request.form.get("Add_Lesson"):
+            # grab user form inputs
+            instructorID = request.form["instructorID"]
+            lessonType = request.form["lessonType"]
+            lessonDate = request.form["lessonDate"]
+            requestBool = request.form["request"]
+
+            # no null inputs
+            query = "INSERT INTO Lessons (instructorID, lessonType, lessonDate, request) VALUES (%s, %s, %s, %s)"
+            cur = mysql.connection.cursor()
+            cur.execute(query, (instructorID, lessonType, lessonDate, requestBool))
+            mysql.connection.commit()
+
+            # redirect back to people page
+            return redirect("/lessons")
+
+        # Grab Lessons data so we send it to our template to display
+    if request.method == "GET":
+        # mySQL query to grab all the people in Instructors
+        query = "SELECT * FROM Lessons;"
+        cur = mysql.connection.cursor()
+        cur.execute(query)
+        data = cur.fetchall()
+
+        # render edit_people page passing our query data and homeworld data to the edit_people template
+        return render_template("lessons.j2", data=data)
+
+@app.route("/delete_lesson/<int:lessonID>")
+def delete_lessons(lessonID):
+    # mySQL query to delete the person with our passed id
+    query = "DELETE FROM Lessons WHERE lessonID = '%s';"
+    cur = mysql.connection.cursor()
+    cur.execute(query, (lessonID,))
+    mysql.connection.commit()
+
+    # redirect back to people page
+    return redirect("/lessons")
 
 # Listener
 
